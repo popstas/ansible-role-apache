@@ -18,6 +18,7 @@
   changed_when: false
   always_run: yes
   register: _apache_version
+  tags: skip_ansible_lint
 
 - name: Create apache_version variable.
   set_fact:
@@ -25,9 +26,11 @@
 
 - include_vars: apache-22.yml
   when: "apache_version.split('.')[1] == '2'"
+  tags: skip_ansible_lint
 
 - include_vars: apache-24.yml
   when: "apache_version.split('.')[1] == '4'"
+  tags: skip_ansible_lint
 
 # Configure Apache.
 - include: "configure-{{ ansible_os_family }}.yml"
