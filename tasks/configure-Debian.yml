@@ -8,6 +8,12 @@
   with_items: "{{ apache_ports_configuration_items }}"
   notify: restart apache
 
+- name: mod_remoteip.conf
+  template:
+    src: remoteip.conf.j2
+    dest: "{{ apache_server_root }}/mods-available/remoteip.conf"
+  notify: restart apache
+
 - name: Enable Apache mods.
   file:
     src: "{{ apache_server_root }}/mods-available/{{ item }}"
